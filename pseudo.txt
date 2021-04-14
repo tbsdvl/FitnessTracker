@@ -1,0 +1,104 @@
+User Story
+
+As a user, I want to be able to view create and track daily workouts. I want to be able to log multiple exercises in a workout on a given day. I should also be able to track the name, type, weight, sets, reps, and duration of exercise. If the exercise is a cardio exercise, I should be able to track my distance traveled.
+
+DB Fields
+Multiple exercises
+name
+type
+weight
+sets
+reps
+exercise time
+
+if cardio -> track distance
+
+Exercise types -> regular? + cardio
+
+Add exercises to the most recent workout plan.
+
+Add new exercises to a new workout plan.
+
+View the combined weight of multiple exercises from the past seven workouts on the stats page.
+
+View the total duration of each workout from the past seven workouts on the stats page.
+
+Workout duration
+$set an alias for $addFields
+
+Aggregation expression -> use model.aggregate()
+
+ex.
+const aggregate = Model.aggregate([
+    {$project: { a: 1, b: 1}},
+    {$skip: 5}
+]);
+
+returns json object, not document
+
+$project -> takes document and specified fields and moves down pipeline
+include field -> <field> 1 or true
+
+Exercise Document Schema
+// Configure schema, then setup properties
+
+Build mongodb database
+
+use exercise
+
+install mongoose
+npm install mongoose --save
+
+// Connect to mongodb
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/exercise', {useNewUrlParser: true, useUnifiedTopology: true});
+
+// Check for connection errors
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+
+});
+
+// Create exercise schema
+const exerciseSchema = new mongoose.Schema({
+
+    "bsonType": "object",
+    "title": "exercises",
+
+    "properties": {
+        "_id": {"bsonType": "objectId" },
+        "name": {"bsonType": "string"},
+        "type": {"bsonType": "string"},
+        "weight": {"bsonType": "int"},
+        "sets": {"bsonType": "int"},
+        "reps": {"bsonType": "int"},
+        "time": {"bsonType": ["int"]}
+    }
+});
+
+// Create exercise model
+const exercise = mongoose.model('Exercise', exerciseSchema);
+
+// Create new exercise document
+
+const newEntry = new Exercise(
+    { "name": "Bench Press"},
+    {"type": "Chest"},
+    {"weight": 100},
+    {"reps": 4},
+    {"time": 60}
+)
+
+console.log(newEntry);
+
+time for exercises will need to be written as a function
+sum of 7 past workouts time altogether
+time can be in seconds
+ex. db.exercise.aggregate([
+    {
+        $set: {
+            "totalTime": {$sum: "time"}
+        }
+    }
+])
