@@ -11,6 +11,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {});
 
+// Example
 // type: "resistance",
 // name: "Bicep Curl",
 // duration: 20,
@@ -20,25 +21,37 @@ db.once("open", () => {});
 
 // Create exercise schema
 const exerciseSchema = new Schema({
-  type: {
-    type: String,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  duration: {
-    type: Number,
-  },
-  weight: {
-    type: Number,
-  },
-  sets: {
-    type: Number,
-  },
-  reps: {
-    type: Number,
-  },
+
+    day: {
+        type: Date,
+        default: Date.now(),
+    },
+
+    exercises: [
+        {
+
+        type: {
+        type: String,
+    },
+        name: {
+        type: String,
+        required: true,
+    },
+        duration: {
+        type: Number,
+    },
+        weight: {
+        type: Number,
+    },
+        sets: {
+        type: Number,
+    },
+        reps: {
+        type: Number,
+    },
+
+        }
+    ],
 });
 
 // TODO: Aggregate functions
