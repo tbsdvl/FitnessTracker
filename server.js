@@ -6,6 +6,14 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+// Connect to Heroku and DB
+mongoose.connect("mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
+
 // Middleware
 app.use(logger("dev"));
 
