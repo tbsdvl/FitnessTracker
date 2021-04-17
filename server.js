@@ -3,8 +3,15 @@
 const express = require("express");
 const logger = require("morgan");
 const app = express();
+const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 8080;
+
+// Connect to mongoDB with mongoose
+mongoose.connect("mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
 
 // Middleware
 app.use(logger("dev"));
