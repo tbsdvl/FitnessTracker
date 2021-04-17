@@ -53,7 +53,7 @@ const exerciseSchema = new Schema({
 // TODO: Aggregate functions
 
 // Create exercise model
-const Exercise = mongoose.model("Exercise", exerciseSchema);
+const Workout = mongoose.model("Exercise", exerciseSchema);
 
 // Export Exercise model
-module.exports = Exercise;
+module.exports = Workout;
