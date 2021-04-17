@@ -3,17 +3,8 @@
 const express = require("express");
 const logger = require("morgan");
 const app = express();
-// const router = express.Router();
-const mongoose = require("mongoose");
-const Exercise = require("./models/schema.js");
 
-const PORT = process.env.PORT || 3001;
-
-// Setup connection
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/exercise", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(logger("dev"));
@@ -27,22 +18,7 @@ express.urlencoded({ extended: true });
 
 // Routing paths
 
-app.use(require('./routes'));
-
-// Index
-// app.get("/", async (req, res) => {
-//   try {
-//     const exerciseData = await Exercise.find({});
-
-//     res.status(200).json(exerciseData);
-//   } catch (err) {
-//     if (err) throw err;
-//     res.status(500).json(err);
-//   }
-// });
-
-// // Post an entry
-// app.post;
+app.use(require("./routes"));
 
 // Listen for server
 app.listen(PORT, () => {
