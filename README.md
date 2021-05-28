@@ -6,7 +6,7 @@ A user may click on the "New Workout" button to begin entering information for a
 After the user enters the information, the app will display a dashboard visualizing the user's workout progress.
 
 # Example
-[!Link](https://github.com/tbsdvl/FitnessTracker/blob/main/fitnesstracker.png)
+![Link](https://github.com/tbsdvl/FitnessTracker/blob/main/fitnesstracker.png)
 
 # Link
 Link to application: [Link](https://dashboard.heroku.com/apps/vast-everglades-53374)
